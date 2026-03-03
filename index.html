@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Startup Pro</title>
+</head>
+<body>
+    <h1>AI Startup International</h1>
+    <textarea id="prompt" placeholder="Enter your prompt"></textarea>
+    <br><br>
+    <button onclick="generateImage()">Generate Image</button>
+    <div id="result"></div>
+
+<script>
+async function generateImage() {
+    const prompt = document.getElementById("prompt").value;
+
+    const response = await fetch("/.netlify/functions/generate-image", {
+        method: "POST",
+        body: JSON.stringify({ prompt })
+    });
+
+    const data = await response.json();
+    document.getElementById("result").innerHTML =
+        `<img src="${data.image}" width="400"/>`;
+}
+</script>
+</body>
+</html>
